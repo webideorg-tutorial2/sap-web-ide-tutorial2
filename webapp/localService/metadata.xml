@@ -1,0 +1,58 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="sap.com.cds_z_sample_demo_" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="Z_Sample_Demo_Cds01Type" sap:label="Sample CDS with Annotations" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AirlineId"/>
+                    <PropertyRef Name="ConnectionId"/>
+                    <PropertyRef Name="FlightDate"/>
+                </Key>
+                <Property Name="AirlineId" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/>
+                <Property Name="ConnectionId" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Connection Number"/>
+                <Property Name="FlightDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Flight Date"/>
+                <Property Name="Price" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Airfare"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="PlaneType" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Plane Type"/>
+            </EntityType>
+            <EntityType Name="Z_Sample_Demo_Cds02Type" sap:label="Sample CDS with Annotations 2" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AirlineId"/>
+                    <PropertyRef Name="ConnectionId"/>
+                </Key>
+                <Property Name="CountryFrom" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country Key"/>
+                <Property Name="CityFrom" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Depart. city"/>
+                <Property Name="CountryTo" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Country Key"/>
+                <Property Name="CityTo" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Arrival city"/>
+                <Property Name="Distance" Type="Edm.String" MaxLength="14" sap:display-format="UpperCase"/>
+                <Property Name="AirlineId" Type="Edm.String" Nullable="false" MaxLength="3" sap:display-format="UpperCase" sap:label="Airline"/>
+                <Property Name="ConnectionId" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Connection Number"/>
+                <Property Name="AirlineName" Type="Edm.String" MaxLength="20" sap:label="Airline"/>
+                <NavigationProperty Name="tosflight" Relationship="sap.com.cds_z_sample_demo_.assoc_8334A83685BFC3B8D1D44AE2A6CB36A7" FromRole="FromRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7" ToRole="ToRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7"/>
+            </EntityType>
+            <Association Name="assoc_8334A83685BFC3B8D1D44AE2A6CB36A7" sap:content-version="1">
+                <End Type="sap.com.cds_z_sample_demo_.Z_Sample_Demo_Cds02Type" Multiplicity="1" Role="FromRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7"/>
+                <End Type="sap.com.cds_z_sample_demo_.Z_Sample_Demo_Cds01Type" Multiplicity="*" Role="ToRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7"/>
+            </Association>
+            <EntityContainer Name="sap.com.cds_z_sample_demo__Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Z_Sample_Demo_Cds01" EntityType="sap.com.cds_z_sample_demo_.Z_Sample_Demo_Cds01Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="Z_Sample_Demo_Cds02" EntityType="sap.com.cds_z_sample_demo_.Z_Sample_Demo_Cds02Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_8334A83685BFC3B8D1D44AE2A6CB36A7" Association="sap.com.cds_z_sample_demo_.assoc_8334A83685BFC3B8D1D44AE2A6CB36A7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Z_Sample_Demo_Cds02" Role="FromRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7"/>
+                    <End EntitySet="Z_Sample_Demo_Cds01" Role="ToRole_assoc_8334A83685BFC3B8D1D44AE2A6CB36A7"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/Z_SAMPLE_DEMO_CDS02_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/Z_SAMPLE_DEMO_CDS02_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
